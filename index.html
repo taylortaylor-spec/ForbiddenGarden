@@ -85,8 +85,8 @@
   .chapter{ display:grid; grid-template-columns: 1fr 1fr; min-height:92vh; position:relative; }
   .chapter.reverse{ direction: rtl; }
   .chapter.reverse > *{ direction: ltr; }
-  .chapter-media{ position:relative; overflow:hidden; }
-  .chapter-media img{ width:100%; height:100%; object-fit:cover; display:block; filter: saturate(1.05); }
+  .chapter-media{ position:relative; overflow:hidden; background:linear-gradient(180deg, rgba(12,24,16,.04), rgba(12,24,16,.1)); }
+  .chapter-media img{ width:100%; height:100%; object-fit:contain; object-position:center; display:block; filter: saturate(1.05); background:var(--cream); }
   .chapter-media::after{
     content:""; position:absolute; inset:0;
     background:linear-gradient(180deg, rgba(12,24,16,0) 60%, rgba(12,24,16,.35) 100%);
@@ -118,19 +118,20 @@
     .chapter-copy{ padding:56px 28px; }
   }
 
-  .gallery-section{ background:var(--cream); padding:90px 24px 100px; text-align:center; }
+  .gallery-section{ background:var(--cream); padding:44px 24px 56px; text-align:center; position:relative; }
   .gallery-heading .eyebrow{ color:var(--hedge); opacity:.6; }
   .gallery-heading h2{ font-size:clamp(30px,4.4vw,44px); color:var(--hedge); margin:10px 0 8px; }
   .gallery-heading p{
     font-family:'Cormorant Garamond', serif; font-style:italic; color:#5b6b5c;
-    font-size:16px; margin-bottom:50px;
+    font-size:16px; margin-bottom:28px;
   }
   .gallery-grid{
     max-width:1100px; margin:0 auto;
     display:grid; grid-template-columns: 1.3fr 1fr 1fr; grid-template-rows: 1fr 1fr;
     gap:14px; height:640px;
+    position:relative;
   }
-  .gallery-grid img{ width:100%; height:100%; object-fit:cover; display:block; border-radius:2px; }
+  .gallery-grid img{ width:100%; height:100%; object-fit:contain; object-position:center; display:block; border-radius:2px; background:var(--cream); }
   .g1{ grid-row: 1 / 3; grid-column: 1; }
   .g2{ grid-row: 1; grid-column: 2; }
   .g3{ grid-row: 1; grid-column: 3; }
@@ -196,36 +197,70 @@
 
   /* ---------- FORM LINKS SECTION ---------- */
   .forms-section{
-    background:var(--cream); padding:90px 24px 100px; text-align:center;
+    background:linear-gradient(180deg, rgba(246,241,230,.98), rgba(238,230,213,.96));
+    padding:56px 24px 90px; text-align:center;
+    position:relative;
+    overflow:hidden;
+    margin-top:0;
   }
+  .forms-section::before,
+  .forms-section::after{
+    content:"";
+    position:absolute;
+    width:280px; height:280px;
+    background:radial-gradient(circle at 50% 50%, rgba(140,255,107,.10), transparent 70%);
+    pointer-events:none;
+  }
+  .forms-section::before{ left:-80px; top:-80px; }
+  .forms-section::after{ right:-90px; bottom:-70px; }
   .forms-section .eyebrow{ color:var(--hedge); opacity:.6; }
-  .forms-section h2{ font-size:clamp(28px,4vw,40px); color:var(--hedge); margin:10px 0 40px; }
+  .forms-section h2{ font-size:clamp(28px,4vw,40px); color:var(--hedge); margin:10px 0 48px; }
   .forms-grid{
     display:flex; flex-wrap:wrap; justify-content:center; gap:28px;
-    max-width:800px; margin:0 auto;
+    max-width:900px; margin:0 auto; align-items:stretch;
+    position:relative;
   }
   .form-card{
-    flex:1 1 300px; max-width:340px;
+    position:relative; overflow:hidden;
+    flex:1 1 300px; max-width:360px;
     background:var(--hedge); color:var(--cream);
+    z-index:1;
     border:1px solid rgba(198,161,91,.35);
-    padding:44px 34px; border-radius:2px;
+    padding:44px 34px; border-radius:14px;
     text-decoration:none; display:block;
     transition:.25s;
+    box-shadow:0 16px 40px rgba(12,24,16,.12);
   }
-  .form-card:hover{ border-color:var(--neon); box-shadow:0 0 30px rgba(140,255,107,.15); transform:translateY(-3px); }
+  .form-card::before{
+    content:""; position:absolute; inset:0;
+    background:linear-gradient(135deg, rgba(198,161,91,.12), transparent 55%, rgba(140,255,107,.08));
+    pointer-events:none;
+  }
+  .form-card:hover{ border-color:var(--neon); box-shadow:0 0 32px rgba(140,255,107,.16); transform:translateY(-4px); }
   .form-card .form-eyebrow{
-    font-size:10px; letter-spacing:.25em; text-transform:uppercase; color:var(--gold-soft); margin-bottom:14px; display:block;
+    font-size:10px; letter-spacing:.25em; text-transform:uppercase; color:var(--gold-soft); margin-bottom:14px; display:block; position:relative;
   }
   .form-card .form-title{
-    font-family:'Italiana', serif; font-size:26px; color:var(--cream); margin-bottom:10px;
+    font-family:'Italiana', serif; font-size:26px; color:var(--cream); margin-bottom:10px; position:relative;
   }
   .form-card .form-desc{
-    font-family:'Cormorant Garamond', serif; font-style:italic; font-size:15px; color:#c9c2ac; margin-bottom:22px;
+    font-family:'Cormorant Garamond', serif; font-style:italic; font-size:15px; color:#c9c2ac; margin-bottom:22px; position:relative; line-height:1.7;
   }
   .form-card .form-cta{
     display:inline-block; font-size:10px; letter-spacing:.2em; text-transform:uppercase;
-    color:var(--neon); border-bottom:1px solid rgba(140,255,107,.4); padding-bottom:3px;
+    color:var(--neon); border-bottom:1px solid rgba(140,255,107,.4); padding-bottom:3px; position:relative;
   }
+  .form-card.featured{
+    min-height:420px;
+    background:linear-gradient(145deg, rgba(20,38,28,.98), rgba(10,24,16,.98));
+    border-color:rgba(198,161,91,.6);
+    box-shadow:0 24px 60px rgba(12,24,16,.24);
+    transform:translateY(-6px);
+  }
+  .form-card.featured .form-eyebrow{ color:var(--neon); }
+  .form-card.featured .form-title{ font-size:30px; margin-bottom:14px; }
+  .form-card.featured .form-desc{ font-size:16px; color:#e7ddc7; }
+  .form-card.featured .form-cta{ color:var(--gold-soft); border-color:rgba(230,207,154,.45); }
 </style>
 </head>
 <body>
@@ -313,13 +348,13 @@
   <div class="eyebrow">Stay Close To The Garden</div>
   <h2 style="font-family:'Parisienne',cursive; font-weight:400;">a little further in</h2>
   <div class="forms-grid">
-    <a class="form-card" href="https://forms.gle/6J6vYzsktFPCmZbv8 target="_blank" rel="noopener">
+    <a class="form-card" href="https://forms.gle/6J6vYzsktFPCmZbv8" target="_blank" rel="noopener">
       <span class="form-eyebrow">Join The Guestlist </span>
       <div class="form-title">The Newsletter</div>
       <p class="form-desc">Whispers from the garden, sent only sometimes.</p>
       <span class="form-cta">Sign Up →</span>
     </a>
-    <a class="form-card" href=""https://forms.gle/a3s6DGWQqTf6h8kp8" target="_blank" rel="noopener">
+    <a class="form-card featured" href="https://forms.gle/a3s6DGWQqTf6h8kp8" target="_blank" rel="noopener">
       <span class="form-eyebrow">Ask</span>
       <div class="form-title">Booking Requests </div>
       <p class="form-desc">Beginning to book for August appointments now. A $300 deposit is required to secure your requested date and time. Please note: Advanced booking is required, Same-day appointments are not available, Last minute requests cannot be accomodated, your appointment not confirmed until you send deposit, remaining balance is due according to booking terms provided at confirmation. </p>
