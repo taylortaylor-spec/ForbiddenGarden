@@ -1,0 +1,434 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Forbidden Garden</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Italiana&family=Parisienne&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --hedge:#14261c;
+    --hedge-deep:#0c1810;
+    --neon:#8CFF6B;
+    --neon-soft: rgba(140,255,107,0.55);
+    --gold:#c6a15b;
+    --gold-soft:#e6cf9a;
+    --blush:#e88ca6;
+    --hydrangea:#a9bfe0;
+    --cream:#f6f1e6;
+    --ink:#0c1810;
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  html{scroll-behavior:smooth;}
+  body{
+    background:var(--cream);
+    color:var(--ink);
+    font-family:'Jost', sans-serif;
+    font-weight:300;
+    overflow-x:hidden;
+  }
+  h1,h2,.display{
+    font-family:'Italiana', serif;
+    font-weight:400;
+    letter-spacing:.04em;
+  }
+  .script{
+    font-family:'Parisienne', cursive;
+    font-weight:400;
+  }
+  .eyebrow{
+    font-family:'Jost',sans-serif;
+    font-size:11px;
+    letter-spacing:.35em;
+    text-transform:uppercase;
+    opacity:.75;
+  }
+
+  /* ---------- HERO ---------- */
+  .hero{
+    position:relative;
+    min-height:100vh;
+    display:flex;
+    align-items:flex-end;
+    justify-content:center;
+    background:var(--hedge-deep);
+    overflow:hidden;
+  }
+  .hero img{
+    position:absolute; inset:0;
+    width:100%; height:100%;
+    object-fit:cover;
+    object-position:50% 20%;
+    opacity:.88;
+  }
+  .hero::before{
+    content:"";
+    position:absolute; inset:0;
+    background:
+      linear-gradient(180deg, rgba(12,24,16,.15) 0%, rgba(12,24,16,.35) 55%, rgba(12,24,16,.96) 100%);
+    z-index:1;
+  }
+  .hero::after{
+    content:"";
+    position:absolute; inset:0;
+    box-shadow: inset 0 0 160px rgba(0,0,0,.55);
+    z-index:1;
+  }
+  .hero-content{
+    position:relative; z-index:2;
+    text-align:center;
+    color:var(--cream);
+    padding: 0 24px 64px;
+    max-width:720px;
+  }
+  .hero-title{
+    font-size:clamp(38px, 8vw, 74px);
+    line-height:1.02;
+    text-shadow: 0 2px 30px rgba(0,0,0,.5);
+  }
+  .hero-title .glow{
+    color:var(--neon);
+    text-shadow: 0 0 18px var(--neon-soft), 0 0 40px rgba(140,255,107,.25);
+  }
+  .hero-sub{
+    margin-top:18px;
+    font-family:'Cormorant Garamond', serif;
+    font-style:italic;
+    font-size:clamp(16px,2.6vw,21px);
+    letter-spacing:.02em;
+    color:var(--gold-soft);
+  }
+  .hero-names{
+    margin-top:22px;
+    font-size:12px;
+    letter-spacing:.3em;
+    text-transform:uppercase;
+    opacity:.8;
+  }
+  .scroll-cue{
+    margin-top:38px;
+    display:inline-block;
+    width:1px; height:44px;
+    background:linear-gradient(180deg, var(--gold-soft), transparent);
+    position:relative;
+  }
+
+  /* ---------- INTRO STRIP ---------- */
+  .intro{
+    background:var(--hedge-deep);
+    color:var(--cream);
+    padding:90px 24px;
+    text-align:center;
+    position:relative;
+  }
+  .intro p{
+    max-width:560px;
+    margin:0 auto;
+    font-family:'Cormorant Garamond', serif;
+    font-size:clamp(17px,2.4vw,22px);
+    line-height:1.7;
+    color:#e9e3d3;
+  }
+
+  /* ---------- CHAPTERS ---------- */
+  .chapter{
+    display:grid;
+    grid-template-columns: 1fr 1fr;
+    min-height:88vh;
+    position:relative;
+  }
+  .chapter.reverse{ direction: rtl; }
+  .chapter.reverse > *{ direction: ltr; }
+  .chapter-media{ position:relative; overflow:hidden; }
+  .chapter-media img{
+    width:100%; height:100%;
+    object-fit:cover;
+    display:block;
+    filter: saturate(1.05);
+  }
+  .chapter-media::after{
+    content:"";
+    position:absolute; inset:0;
+    background:linear-gradient(180deg, rgba(12,24,16,0) 60%, rgba(12,24,16,.35) 100%);
+  }
+  .chapter-copy{
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    padding:70px 64px;
+    background:var(--hedge);
+    color:var(--cream);
+    position:relative;
+  }
+  .chapter-copy .eyebrow{ color:var(--neon); margin-bottom:14px; }
+  .chapter-copy h2{
+    font-size:clamp(30px,4vw,46px);
+    color:var(--cream);
+    margin-bottom:6px;
+  }
+  .chapter-copy .duration{
+    font-family:'Cormorant Garamond', serif;
+    font-style:italic;
+    color:var(--gold-soft);
+    font-size:19px;
+    margin-bottom:26px;
+  }
+  .chapter-copy .desc{
+    font-family:'Cormorant Garamond', serif;
+    font-size:17px;
+    line-height:1.8;
+    color:#dcd6c4;
+    max-width:420px;
+    margin-bottom:28px;
+  }
+  .chapter-copy .placeholder-tag{
+    font-size:10px;
+    letter-spacing:.18em;
+    text-transform:uppercase;
+    color:var(--blush);
+    border:1px solid rgba(232,140,166,.4);
+    display:inline-block;
+    padding:6px 12px;
+    border-radius:2px;
+    width:fit-content;
+    opacity:.85;
+  }
+  .vine-rule{
+    width:46px; height:1px;
+    background:linear-gradient(90deg, var(--gold), transparent);
+    margin-bottom:22px;
+  }
+
+  @media (max-width: 860px){
+    .chapter, .chapter.reverse{ grid-template-columns:1fr; direction:ltr; }
+    .chapter-media{ height:56vh; }
+    .chapter-copy{ padding:56px 28px; }
+  }
+
+  /* ---------- THRESHOLD ---------- */
+  .threshold{
+    background:
+      radial-gradient(ellipse at 50% 0%, rgba(140,255,107,.06), transparent 60%),
+      var(--hedge-deep);
+    color:var(--cream);
+    padding:110px 24px;
+    text-align:center;
+    position:relative;
+    border-top:1px solid rgba(198,161,91,.25);
+    border-bottom:1px solid rgba(198,161,91,.25);
+  }
+  .threshold .eyebrow{ color:var(--gold-soft); }
+  .threshold h2{
+    font-size:clamp(30px,5vw,48px);
+    margin:14px 0 8px;
+  }
+  .threshold .script-line{
+    font-size:clamp(20px,3vw,28px);
+    color:var(--neon);
+    text-shadow:0 0 16px var(--neon-soft);
+    margin-bottom:34px;
+  }
+  .threshold-card{
+    max-width:480px;
+    margin:0 auto;
+    text-align:left;
+    background:rgba(255,255,255,.03);
+    border:1px solid rgba(198,161,91,.3);
+    padding:38px 40px;
+    border-radius:2px;
+  }
+  .threshold-card p.intro-line{
+    font-family:'Cormorant Garamond', serif;
+    font-size:17px;
+    color:#dcd6c4;
+    margin-bottom:22px;
+    line-height:1.7;
+  }
+  .threshold-card ul{
+    list-style:none;
+    margin-bottom:24px;
+  }
+  .threshold-card li{
+    font-size:15px;
+    padding:10px 0;
+    border-bottom:1px solid rgba(198,161,91,.15);
+    display:flex;
+    gap:12px;
+    color:#f0ead9;
+  }
+  .threshold-card li:last-child{ border-bottom:none; }
+  .threshold-card li::before{
+    content:"—";
+    color:var(--gold);
+    flex-shrink:0;
+  }
+  .threshold-card .send-to{
+    font-size:13px;
+    letter-spacing:.05em;
+    color:var(--gold-soft);
+    margin-bottom:14px;
+  }
+  .threshold-card .send-to a{ color:var(--neon); text-decoration:none; border-bottom:1px solid rgba(140,255,107,.4); }
+  .threshold-card .fine{
+    font-family:'Cormorant Garamond', serif;
+    font-style:italic;
+    font-size:14px;
+    color:#a79c7e;
+    line-height:1.6;
+  }
+
+  /* ---------- CLOSING ---------- */
+  .closing{
+    position:relative;
+    min-height:70vh;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    background:var(--hedge-deep);
+    overflow:hidden;
+  }
+  .closing img{
+    position:absolute; inset:0;
+    width:100%; height:100%;
+    object-fit:cover;
+    opacity:.5;
+  }
+  .closing::before{
+    content:"";
+    position:absolute; inset:0;
+    background:linear-gradient(180deg, rgba(12,24,16,.75), rgba(12,24,16,.92));
+  }
+  .closing-content{
+    position:relative; z-index:2;
+    text-align:center;
+    color:var(--cream);
+    padding:24px;
+  }
+  .closing-content .script{
+    font-size:clamp(26px,4vw,40px);
+    color:var(--gold-soft);
+    display:block;
+    margin-bottom:18px;
+  }
+  .closing-content .names{
+    font-size:12px;
+    letter-spacing:.3em;
+    text-transform:uppercase;
+    opacity:.7;
+    margin-bottom:30px;
+  }
+  .cta-btn{
+    display:inline-block;
+    padding:16px 40px;
+    border:1px solid var(--neon);
+    color:var(--neon);
+    text-decoration:none;
+    font-size:11px;
+    letter-spacing:.25em;
+    text-transform:uppercase;
+    transition:.25s;
+  }
+  .cta-btn:hover{
+    background:var(--neon);
+    color:var(--ink);
+    box-shadow:0 0 24px var(--neon-soft);
+  }
+
+  footer{
+    background:var(--ink);
+    color:#8a8371;
+    text-align:center;
+    padding:28px;
+    font-size:11px;
+    letter-spacing:.1em;
+  }
+</style>
+</head>
+<body>
+
+<!-- HERO -->
+<section class="hero">
+  <img src="hero.jpeg" alt="hero">
+  <div class="hero-content">
+    <div class="eyebrow" style="color:var(--gold-soft)">Keiki × Emmy Demure</div>
+    <h1 class="hero-title">THE <span class="glow">FORBIDDEN</span> GARDEN</h1>
+    <p class="hero-sub">"You weren't supposed to find us."</p>
+    <div class="scroll-cue"></div>
+  </div>
+</section>
+
+<!-- INTRO -->
+<section class="intro">
+  <p>Two women. One forbidden garden. There are places you're invited to visit — and then there are places you're not supposed to find at all.</p>
+</section>
+
+<!-- CHAPTER 1 -->
+<section class="chapter" id="invitation">
+  <div class="chapter-media"><img src="invitation.jpeg" alt="the invitation"></div>
+  <div class="chapter-copy">
+    <div class="eyebrow">Chapter One</div>
+    <div class="vine-rule"></div>
+    <h2>The Invitation</h2>
+    <div class="duration">one hour</div>
+    <p class="desc">A first taste of the garden — placeholder description of what this tier includes and the mood it sets.</p>
+    <span class="placeholder-tag">price / details go here</span>
+  </div>
+</section>
+
+<!-- CHAPTER 2 -->
+<section class="chapter reverse" id="bouquet">
+  <div class="chapter-media"><img src="bouquet.jpeg" alt="the wild bouquet"></div>
+  <div class="chapter-copy">
+    <div class="eyebrow">Chapter Two</div>
+    <div class="vine-rule"></div>
+    <h2>The Wild Bouquet</h2>
+    <div class="duration">ninety minutes</div>
+    <p class="desc">Further in, further undone — placeholder description for the mid-tier experience.</p>
+    <span class="placeholder-tag">price / details go here</span>
+  </div>
+</section>
+
+<!-- CHAPTER 3 -->
+<section class="chapter" id="hedge">
+  <div class="chapter-media"><img src="hedge.jpeg" alt="beyond the hedge"></div>
+  <div class="chapter-copy">
+    <div class="eyebrow">Chapter Three</div>
+    <div class="vine-rule"></div>
+    <h2>Beyond the Hedge</h2>
+    <div class="duration">two hours</div>
+    <p class="desc">No one's looking here — placeholder description for the fullest, longest chapter.</p>
+    <span class="placeholder-tag">price / details go here</span>
+  </div>
+</section>
+
+<!-- THRESHOLD -->
+<section class="threshold">
+  <div class="eyebrow">Before You Enter</div>
+  <h2 class="script script-line">The Threshold</h2>
+  <div class="threshold-card">
+    <p class="intro-line">Discretion goes both ways. Before you're let in, we ask a little trust in return.</p>
+    <ul>
+      <li>A photo ID held next to your face (selfie)</li>
+      <li>Your name</li>
+      <li>A short introduction — who you are, what brought you here</li>
+    </ul>
+    <div class="send-to">Send to <a href="mailto:keikipacificmuse@gmail.com">keikipacificmuse@gmail.com</a></div>
+    <p class="fine">This stays between us. Verification exists to protect the space — for you and for us.</p>
+  </div>
+</section>
+
+<!-- CLOSING -->
+<section class="closing">
+  <img src="hero.jpeg" alt="closing">
+  <div class="closing-content">
+    <span class="script">until we meet in the garden</span>
+    <div class="names">Keiki &amp; Emmy Demure</div>
+    <a href="#" class="cta-btn">Enter the Garden</a>
+  </div>
+</section>
+
+<footer>THE FORBIDDEN GARDEN</footer>
+
+</body>
+</html>
